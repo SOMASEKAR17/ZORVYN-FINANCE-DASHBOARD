@@ -29,3 +29,21 @@
 * **Hover State:** The `backdrop-filter` blur increases to `40px` and the border brightness increases by 20%.
 * **Parallax:** Internal "liquid" highlights should shift slightly in the opposite direction of cursor movement to simulate 3D refraction.
 
+---
+
+## 3. Layout Architecture
+
+### A. Global Navigation
+* **Left Sidebar:** Slimline vertical dock containing minimalist stroke icons. Active state is indicated by a glowing purple orb behind the icon.
+* **Header:** Displays the master balance `$1,025,254.00`. Includes a toggle to hide sensitive data and a global date-range picker.
+
+### B. Widget Grid
+| Widget | Functionality | UI Highlights |
+| :--- | :--- | :--- |
+| **Nuance Currency** | Multi-currency tracking | Circular flags with glass-morphic containers. |
+| **Activities** | Visual cash flow | Area chart with a purple gradient stroke and `403,585` peak indicator. |
+| **Saving Wallet** | Goal-based savings | Soft-edge category icons (Travel, Emergency, etc.). |
+| **Virtual Card** | Digital payment access | Deep purple gradient card with "Liquid Glass" overlay. |
+| **Robo Advisor** | Upsell/AI features | Floating 3D bot icon with a "Try Now" glass button. |
+| **Recent Transactions**| Ledger tracking | Filterable list (All/Income/Expenses) with brand-specific icons. |
+
