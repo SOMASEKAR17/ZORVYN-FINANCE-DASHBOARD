@@ -39,19 +39,22 @@ useEffect(() => {
   const progressToFrame = useTransform(scrollYProgress, [0, 1], [1, FRAMES_COUNT]);
 
   const renderFrame = useCallback((index) => {
-    if (!canvasRef.current || images.length < FRAMES_COUNT) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const img = images[Math.max(0, Math.min(Math.floor(index) - 1, FRAMES_COUNT - 1))];
+  if (!canvasRef.current || images.length < FRAMES_COUNT) return;
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext('2d');
+  const img = images[Math.max(0, Math.min(Math.floor(index) - 1, FRAMES_COUNT - 1))];
 
-    if (img && img.complete) {
-      const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-      const x = (canvas.width - img.width * scale) / 2;
-      const y = (canvas.height - img.height * scale) / 2;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
-    }
-  }, [images]);
+  if (img && img.complete) {
+    const mobile = window.innerWidth < 768;
+    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+    const horizontalShift = mobile ? 0 : -canvas.width * 0.08;
+    const verticalShift = mobile ? -canvas.height * 0.1 : 0;
+    const x = (canvas.width - img.width * scale) / 2 + horizontalShift;
+    const y = (canvas.height - img.height * scale) / 2 + verticalShift;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
+  }
+}, [images]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
