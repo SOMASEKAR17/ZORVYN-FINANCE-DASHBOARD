@@ -2,18 +2,6 @@ const parseAmount = (amt) => parseFloat(amt.replace(/[$,+]/g, ''));
 
 const calculateBalance = (txs) => txs.reduce((acc, t) => acc + parseAmount(t.amount), 0);
 const calculateSavings = (txs) => txs.filter(t => t.category === 'Transfer').reduce((acc, t) => acc + parseAmount(t.amount), 0);
-const lastIncomeTx = [
-  {
-    id: 4,
-    title: 'Cashback Reward',
-    type: 'Rewards',
-    time: '1/27/2026, 7:44:37 AM',
-    amount: '+$112.69',
-    neg: false,
-    category: 'Income',
-    color: '#4ade80'
-  }
-][0]; // Example placeholder logic - I'll use the export below
 
 export const dashboardData = {
   get calculated() {

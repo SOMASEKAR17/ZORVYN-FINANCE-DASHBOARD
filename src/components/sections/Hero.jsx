@@ -51,7 +51,7 @@ useEffect(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
     }
-  }, [images, isMobile]);
+  }, [images]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -62,13 +62,11 @@ useEffect(() => {
 
   useEffect(() => {
     const loadedImages = [];
-    let count = 0;
     for (let i = 1; i <= FRAMES_COUNT; i++) {
       const img = new Image();
       img.src = FRAME_PATH(i);
       img.onload = () => {
-        count++;
-        setLoadedCount(count);
+        setLoadedCount(prev => prev + 1);
       };
       loadedImages.push(img);
     }
