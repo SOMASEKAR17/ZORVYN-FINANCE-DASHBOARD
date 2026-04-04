@@ -14,6 +14,7 @@ export default function Hero() {
   const textRef = useRef(null);
   const [images, setImages] = useState([]);
   const [loadedCount, setLoadedCount] = useState(0);
+  const animationDone = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,6 +22,22 @@ export default function Hero() {
   });
 
   const progressToFrame = useTransform(scrollYProgress, [0, 1], [1, FRAMES_COUNT]);
+
+  const isLoading = loadedCount < FRAMES_COUNT;
+  const loadProgress = (loadedCount / FRAMES_COUNT) * 100;
+
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      ScrollTrigger.refresh();
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isLoading]);
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,13 +63,17 @@ export default function Hero() {
     const img = images[Math.max(0, Math.min(Math.floor(index) - 1, FRAMES_COUNT - 1))];
 
     if (img && img.complete) {
-      const mobile = window.innerWidth < 768;
-      const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-      const horizontalShift = mobile ? 0 : -canvas.width * 0.08;
-      const verticalShift = mobile ? -canvas.height * 0.1 : 0;
-      const x = (canvas.width - img.width * scale) / 2 + horizontalShift;
-      const y = (canvas.height - img.height * scale) / 2 + verticalShift;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const displayW = window.innerWidth;
+      const displayH = window.innerHeight;
+      const mobile = displayW < 768;
+      
+      const scale = Math.max(displayW / img.width, displayH / img.height);
+      const horizontalShift = mobile ? 0 : -displayW * 0.08;
+      const verticalShift = mobile ? -displayH * 0.1 : 0;
+      const x = (displayW - img.width * scale) / 2 + horizontalShift;
+      const y = (displayH - img.height * scale) / 2 + verticalShift;
+      
+      ctx.clearRect(0, 0, displayW, displayH);
       ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
     }
   }, [images]);
@@ -62,10 +83,13 @@ export default function Hero() {
     for (let i = 1; i <= FRAMES_COUNT; i++) {
       const img = new Image();
       img.src = FRAME_PATH(i);
-      if (i <= 20) {
-        img.fetchPriority = 'high';
-      }
-      img.onload = () => setLoadedCount(prev => prev + 1);
+      if (i <= 20) img.fetchPriority = 'high';
+      
+      const countInc = () => setLoadedCount(prev => prev + 1);
+      img.onload = countInc;
+      img.onerror = countInc;
+      img.onabort = countInc;
+      
       loadedImages.push(img);
     }
     setImages(loadedImages);
@@ -78,7 +102,11 @@ export default function Hero() {
   useEffect(() => {
     let frameId;
     const update = () => {
-      renderFrame(progressToFrame.get());
+      const currentFrame = progressToFrame.get();
+      renderFrame(currentFrame);
+      if (currentFrame >= FRAMES_COUNT - 1) {
+        animationDone.current = true;
+      }
       frameId = requestAnimationFrame(update);
     };
     frameId = requestAnimationFrame(update);
@@ -89,21 +117,24 @@ export default function Hero() {
     const resize = () => {
       if (!canvasRef.current) return;
       const dpr = window.devicePixelRatio || 1;
-      canvasRef.current.width = window.innerWidth * dpr;
-      canvasRef.current.height = window.innerHeight * dpr;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      
+      canvasRef.current.width = w ;
+      canvasRef.current.height = h ;
+      canvasRef.current.style.width = `${w}px`;
+      canvasRef.current.style.height = `${h}px`;
+      
       const ctx = canvasRef.current.getContext('2d');
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     window.addEventListener('resize', resize);
     resize();
     return () => window.removeEventListener('resize', resize);
   }, []);
 
-  const isLoading = loadedCount < FRAMES_COUNT;
-  const loadProgress = (loadedCount / FRAMES_COUNT) * 100;
-
   return (
-    <section ref={containerRef} className="relative w-full h-[250vh] bg-white">
+    <section ref={containerRef} className="relative w-full h-[200vh] bg-white">
       {isLoading && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white gap-6">
           <p className="text-[#14222E]/80 text-[20px] tracking-[0.4em] uppercase font-bold">
@@ -124,7 +155,7 @@ export default function Hero() {
       <div className="sticky top-0 w-full h-screen overflow-hidden">
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full"
           style={{ display: 'block' }}
         />
 

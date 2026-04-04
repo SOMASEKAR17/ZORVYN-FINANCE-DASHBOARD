@@ -12,8 +12,16 @@
     --secondary-text: #9CA3AF;
   }
 
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
-    @apply antialiased overflow-x-hidden;
+    @apply antialiased;
     background-color: var(--canvas);
     color: var(--primary-text);
     font-family: 'Inter', sans-serif;
@@ -40,43 +48,11 @@
   }
 }
 
-main{
+main {
   padding: 0px;
   margin: 0px;
 }
 
 .animation-canvas {
   @apply fixed inset-0 w-full h-full z-[1] pointer-events-none;
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-}
-::-webkit-scrollbar-track {
-  background-color: var(--canvas);
-}
-::-webkit-scrollbar-thumb {
-  @apply rounded-full;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--accent);
-}
-
-html {
-  overflow-x: hidden;
-  scrollbar-gutter: stable;
-}
-
-body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-html:has(section) {
-  scrollbar-width: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
 }
