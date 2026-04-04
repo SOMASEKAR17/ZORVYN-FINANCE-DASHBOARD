@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Wallet, BarChart2, PieChart, User, Settings, LogOut, Layout } from 'lucide-react';
+import { Home, Wallet, BarChart2, User, Settings, LogOut, Layout } from 'lucide-react';
 
 const Sidebar = () => {
   const location = useLocation();

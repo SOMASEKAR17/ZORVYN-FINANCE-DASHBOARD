@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { dashboardData } from '../../data/dashboardData';
 import { Plus, X } from 'lucide-react';
 
 const FLAG_MAP = {

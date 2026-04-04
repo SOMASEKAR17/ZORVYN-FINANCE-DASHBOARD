@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, ArrowDown } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
 export function LargestOutflows({ transactions }) {
   const [expanded, setExpanded] = useState(false);

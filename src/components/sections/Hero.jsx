@@ -14,7 +14,7 @@ export default function Hero() {
   const textRef = useRef(null);
   const [images, setImages] = useState([]);
   const [loadedCount, setLoadedCount] = useState(0);
-  const animationDone = useRef(false);
+
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -101,9 +101,6 @@ export default function Hero() {
     const update = () => {
       const currentFrame = progressToFrame.get();
       renderFrame(currentFrame);
-      if (currentFrame >= FRAMES_COUNT - 1) {
-        animationDone.current = true;
-      }
       frameId = requestAnimationFrame(update);
     };
     frameId = requestAnimationFrame(update);
