@@ -9,12 +9,12 @@ const TopBar = () => (
     </div>
 
     <div className="flex items-center gap-3">
-      <div className="flex items-center gap-2 bg-white border border-black/8 rounded-full px-4 py-2 text-xs text-[#6B7280]">
-        <Calendar size={13} />
+      <div className="flex items-center gap-2 bg-white border border-[#831AE3]/20 rounded-full px-4 py-2 text-xs text-[#0A0A0A] font-medium">
+        <Calendar size={13} className="text-[#831AE3]" />
         <span>05/05/2024 - 05/06/2024</span>
       </div>
-      <button className="w-9 h-9 flex items-center justify-center bg-white border border-black/8 rounded-lg hover:bg-black/5 transition-colors">
-        <Search size={15} className="text-[#6B7280]" />
+      <button className="w-9 h-9 flex items-center justify-center bg-white border border-black/8 rounded-lg hover:border-[#831AE3]/30 hover:text-[#831AE3] transition-all">
+        <Search size={15} className="text-[#6B7280] group-hover:text-[#831AE3]" />
       </button>
     </div>
   </div>

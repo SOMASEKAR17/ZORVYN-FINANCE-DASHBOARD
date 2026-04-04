@@ -6,7 +6,7 @@ const AIAdvisor = () => (
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.05),transparent_60%)]" />
 
     <div className="w-14 h-14 rounded-full bg-white/8 border border-white/10 flex items-center justify-center mb-6 relative">
-      <div className="absolute inset-0 rounded-full border border-white/10 animate-ping opacity-20" />
+      <div className="absolute inset-0 rounded-full border border-[#831AE3] animate-ping opacity-30" />
       <Cpu size={26} className="text-white" />
     </div>
 
@@ -17,7 +17,7 @@ const AIAdvisor = () => (
       Get automated management, real time insights and personalized advice
     </p>
 
-    <button className="w-full bg-white text-[#0A0A0A] py-3.5 rounded-full text-xs font-black uppercase tracking-wider hover:bg-white/90 transition-all">
+    <button className="w-full bg-white text-[#0A0A0A] py-3.5 rounded-full text-xs font-black uppercase tracking-wider hover:bg-[#831AE3] hover:text-white transition-all">
       Try Now
     </button>
   </div>

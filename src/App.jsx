@@ -4,6 +4,7 @@ import { useScroll } from 'framer-motion';
 import Lenis from '@studio-freight/lenis';
 import LandingPage from './pages/LandingPage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import TransactionsPage from './pages/TransactionsPage.jsx';
 
 export default function App() {
   const containerRef = useRef(null);
@@ -33,6 +34,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage scrollYProgress={scrollYProgress} />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/transactions" element={<TransactionsPage />} />
         </Routes>
       </main>
     </Router>
