@@ -21,7 +21,7 @@ export default function Hero() {
     offset: ["start start", "end end"]
   });
 
-  const progressToFrame = useTransform(scrollYProgress, [0, 1], [1, FRAMES_COUNT]);
+  const progressToFrame = useTransform(scrollYProgress, [0, 1], [1, FRAMES_COUNT], { clamp: true });
 
   const isLoading = loadedCount < FRAMES_COUNT;
   const loadProgress = (loadedCount / FRAMES_COUNT) * 100;
@@ -132,7 +132,7 @@ export default function Hero() {
   
 
   return (
-    <section ref={containerRef} className="relative w-full h-[200vh] bg-gradient-to-b from-[#F4F7F6] via-[#D3DCE3] to-[#97A3AE]">
+    <section ref={containerRef} className="relative w-full h-[150vh] md:h-[200vh] bg-gradient-to-b from-[#F4F7F6] via-[#D3DCE3] to-[#97A3AE]">
       {isLoading && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white gap-6">
           <p className="text-[#14222E]/80 text-[20px] tracking-[0.4em] uppercase font-bold">
