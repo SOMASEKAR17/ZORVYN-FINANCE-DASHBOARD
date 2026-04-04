@@ -66,7 +66,7 @@ export default function Hero() {
       const displayW = window.innerWidth;
       const displayH = window.innerHeight;
       
-      const scale = displayW / img.width;
+      const scale = Math.max(displayW / img.width, displayH / img.height);
       const x = (displayW - img.width * scale) / 2;
       const y = (displayH - img.height * scale) / 2;
       

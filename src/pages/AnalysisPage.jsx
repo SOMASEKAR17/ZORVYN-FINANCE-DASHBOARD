@@ -61,10 +61,10 @@ const AnalysisPage = () => {
     <div className="min-h-screen bg-[#ECEEF1] text-[#0A0A0A] flex overflow-x-hidden">
       <ScrollProgress />
       <Sidebar />
-      <main className="flex flex-col w-full min-h-screen">
+      <main className="flex flex-col w-full min-h-screen md:pl-[60px] pb-20 md:pb-0">
         <TopBar />
         
-        <div className="p-8 md:p-12 lg:pl-24 lg:pr-12 pt-0 flex flex-col gap-10">
+        <div className="px-6 md:px-12 lg:px-20 pt-0 flex flex-col gap-10">
           <header className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-[#831AE3] font-black uppercase text-[10px] tracking-[0.3em]">
               <Zap size={14} fill="#831AE3" />

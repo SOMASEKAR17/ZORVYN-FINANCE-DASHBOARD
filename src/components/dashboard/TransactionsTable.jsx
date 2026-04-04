@@ -84,7 +84,7 @@ export default function TransactionsTable() {
   });
 
   return (
-    <div className="w-full bg-white rounded-[32px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#ECEEF1]">
+    <div className="w-full bg-white mb-20 rounded-[32px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#ECEEF1]">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-10 gap-6">
         <div>
           <h2 className="text-2xl font-black tracking-tight text-[#0A0A0A]">Transactions</h2>
@@ -92,22 +92,24 @@ export default function TransactionsTable() {
         </div>
         
         <div className="flex flex-col md:flex-row gap-4 items-center">
-          <div className="flex p-1 bg-[#F4F7F6] rounded-2xl border border-black/5">
-            {filters.map((f) => (
-              <button
-                key={f}
-                onClick={() => setCategoryFilter(f)}
-                className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
-                  activeCategory === f
-                    ? 'bg-white text-[#831AE3] shadow-sm shadow-black/5 border border-black/5'
-                    : 'text-[#818F9B] hover:text-[#0A0A0A]'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
+          <div className="flex p-1 bg-[#F4F7F6] rounded-2xl border border-black/5 overflow-x-auto scrollbar-none min-w-0 flex-shrink-0 max-w-full">
+            <div className="flex whitespace-nowrap">
+              {filters.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setCategoryFilter(f)}
+                  className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex-shrink-0 ${
+                    activeCategory === f
+                      ? 'bg-white text-[#831AE3] shadow-sm shadow-black/5 border border-black/5'
+                      : 'text-[#818F9B] hover:text-[#0A0A0A]'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
-          
+
           <div className="relative group min-w-[260px]">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#818F9B] group-focus-within:text-[#831AE3] transition-colors" size={17} />
             <input

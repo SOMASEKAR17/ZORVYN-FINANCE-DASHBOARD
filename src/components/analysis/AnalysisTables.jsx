@@ -7,19 +7,19 @@ export function LargestOutflows({ transactions }) {
   const list = transactions.slice(0, displayCount);
 
   return (
-    <div className="bg-white rounded-[32px] p-10 border border-[#ECEEF1] shadow-sm">
-      <h2 className="text-2xl font-black uppercase tracking-tight text-[#0A0A0A] mb-8">Largest Outflows</h2>
+    <div className="bg-white rounded-[32px] p-6 md:p-10 border border-[#ECEEF1] shadow-sm">
+      <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight text-[#0A0A0A] mb-8">Largest Outflows</h2>
       <div className="space-y-4">
         {list.map((t, i) => (
           <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-[#F4F7F6] border border-black/5">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center font-bold text-xs">#{i+1}</div>
-              <div>
-                <div className="font-black text-sm text-[#0A0A0A]">{t.title}</div>
-                <div className="text-[10px] uppercase font-bold text-[#818F9B] tracking-widest">{t.time}</div>
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center font-bold text-xs flex-shrink-0">#{i+1}</div>
+              <div className="min-w-0">
+                <div className="font-black text-xs md:text-sm text-[#0A0A0A] truncate">{t.title}</div>
+                <div className="text-[9px] md:text-[10px] uppercase font-bold text-[#818F9B] tracking-widest">{t.time}</div>
               </div>
             </div>
-            <div className={`font-black ${t.neg ? 'text-red-500' : 'text-emerald-500'}`}>{t.amount}</div>
+            <div className={`font-black text-sm md:text-base flex-shrink-0 ml-4 ${t.neg ? 'text-red-500' : 'text-emerald-500'}`}>{t.amount}</div>
           </div>
         ))}
       </div>
@@ -39,18 +39,18 @@ export function RecurringExpenses({ groups }) {
   const list = groups.slice(0, displayCount);
 
   return (
-    <div className="bg-[#0A0A0A] rounded-[32px] p-10 shadow-xl overflow-hidden relative">
+    <div className="bg-[#0A0A0A] rounded-[32px] p-6 mb-20 md:p-10 shadow-xl overflow-hidden relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(131,26,227,0.1),transparent_70%)]" />
-      <h2 className="text-2xl font-black uppercase tracking-tight text-white mb-8 relative z-10">Recurring Expenditure</h2>
+      <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight text-white mb-8 relative z-10">Recurring Expenditure</h2>
       <div className="space-y-4 relative z-10">
         {list.map((g, i) => (
-          <div key={i} className="flex items-center justify-between p-5 rounded-2xl border border-white/10 bg-white/5">
-            <div>
-              <div className="font-bold text-white">{g.title}</div>
-              <div className="text-[10px] text-white/40 uppercase font-black tracking-widest">{g.count} Occurrences / Month</div>
+          <div key={i} className="flex items-center justify-between p-4 md:p-5 rounded-2xl border border-white/10 bg-white/5">
+            <div className="min-w-0">
+              <div className="font-bold text-sm md:text-base text-white truncate">{g.title}</div>
+              <div className="text-[9px] md:text-[10px] text-white/40 uppercase font-black tracking-widest">{g.count} Occurrences / Month</div>
             </div>
-            <div className="text-right">
-              <div className="font-black text-white">Avg ${ (g.total / g.count).toFixed(2) }</div>
+            <div className="text-right ml-4 flex-shrink-0">
+              <div className="font-black text-sm md:text-base text-white">Avg ${ (g.total / g.count).toFixed(2) }</div>
             </div>
           </div>
         ))}

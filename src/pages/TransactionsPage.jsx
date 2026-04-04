@@ -9,9 +9,9 @@ export default function TransactionsPage() {
     <div className="min-h-screen bg-[#ECEEF1] text-[#0A0A0A] flex overflow-x-hidden">
       <ScrollProgress />
       <Sidebar />
-      <main className="flex flex-col w-full min-h-screen">
+      <main className="flex flex-col w-full min-h-screen md:pl-[60px] pb-20 md:pb-0">
         <TopBar />
-        <div className="p-8 md:p-12 lg:pl-24 lg:pr-12 pt-0 flex flex-col gap-8">
+        <div className="px-6 md:px-12 lg:px-20 pt-0 flex flex-col gap-8">
           <header className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <div className="flex items-center gap-3 text-[#831AE3] font-black uppercase text-sm tracking-[0.2em] mb-3">

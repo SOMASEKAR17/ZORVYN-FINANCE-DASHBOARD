@@ -5,7 +5,7 @@ import { dashboardData } from '../../data/dashboardData';
 const BalanceSection = () => {
   const { user } = dashboardData;
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-6 pl-20 pr-20">
+    <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-6 px-6 md:px-12 lg:px-20">
       <div className="space-y-1.5">
         <div className="flex items-center gap-3">
           <h2 className="text-4xl font-black tracking-tight text-[#0A0A0A] flex items-baseline">
