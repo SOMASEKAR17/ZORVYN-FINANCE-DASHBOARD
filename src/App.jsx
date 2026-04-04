@@ -5,6 +5,7 @@ import Lenis from '@studio-freight/lenis';
 import LandingPage from './pages/LandingPage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import TransactionsPage from './pages/TransactionsPage.jsx';
+import AnalysisPage from './pages/AnalysisPage.jsx';
 
 export default function App() {
   const containerRef = useRef(null);
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/" element={<LandingPage scrollYProgress={scrollYProgress} />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/transactions" element={<TransactionsPage />} />
+          <Route path="/analysis" element={<AnalysisPage />} />
         </Routes>
       </main>
     </Router>
