@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAMES_COUNT = 195;
-const FRAME_PATH = (frame) => `/animation/ezgif-frame-${frame.toString().padStart(3, '0')}.png`;
+const FRAME_PATH = (frame) => `/animation/ezgif-frame-${frame.toString().padStart(3, '0')}.webp`;
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -62,9 +62,10 @@ export default function Hero() {
     for (let i = 1; i <= FRAMES_COUNT; i++) {
       const img = new Image();
       img.src = FRAME_PATH(i);
-      img.onload = () => {
-        setLoadedCount(prev => prev + 1);
-      };
+      if (i <= 20) {
+        img.fetchPriority = 'high';
+      }
+      img.onload = () => setLoadedCount(prev => prev + 1);
       loadedImages.push(img);
     }
     setImages(loadedImages);
@@ -104,17 +105,17 @@ export default function Hero() {
   return (
     <section ref={containerRef} className="relative w-full h-[250vh] bg-white">
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#14222E] gap-6">
-          <p className="text-[#831AE3]/20 text-[10px] tracking-[0.4em] uppercase font-bold">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white gap-6">
+          <p className="text-[#14222E]/80 text-[20px] tracking-[0.4em] uppercase font-bold">
             Zorvyn
           </p>
-          <div className="w-48 h-px bg-white/5 relative overflow-hidden">
+          <div className="w-48 h-px bg-black/10 relative overflow-hidden">
             <div
               className="absolute inset-y-0 left-0 bg-[#6E859F] transition-all duration-300 ease-out"
               style={{ width: `${loadProgress}%` }}
             />
           </div>
-          <p className="text-[#CBD6D9]/40 text-[10px] tabular-nums font-medium tracking-widest">
+          <p className="text-[#14222E]/30 text-[10px] tabular-nums font-medium tracking-widest">
             {Math.round(loadProgress)}%
           </p>
         </div>
