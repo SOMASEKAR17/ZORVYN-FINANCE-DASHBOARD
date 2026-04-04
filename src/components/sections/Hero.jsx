@@ -8,60 +8,54 @@ gsap.registerPlugin(ScrollTrigger);
 const FRAMES_COUNT = 195;
 const FRAME_PATH = (frame) => `/animation/ezgif-frame-${frame.toString().padStart(3, '0')}.png`;
 
-
-
 export default function Hero() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
+  const textRef = useRef(null);
   const [images, setImages] = useState([]);
   const [loadedCount, setLoadedCount] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  const textRef = useRef(null);
-
-useEffect(() => {
-  gsap.to(textRef.current, {
-    y: 100,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: containerRef.current,
-      start: 'top top',
-      end: '25% top',
-      scrub: true,
-    }
-  });
-}, []);
   const progressToFrame = useTransform(scrollYProgress, [0, 1], [1, FRAMES_COUNT]);
 
-  const renderFrame = useCallback((index) => {
-  if (!canvasRef.current || images.length < FRAMES_COUNT) return;
-  const canvas = canvasRef.current;
-  const ctx = canvas.getContext('2d');
-  const img = images[Math.max(0, Math.min(Math.floor(index) - 1, FRAMES_COUNT - 1))];
-
-  if (img && img.complete) {
-    const mobile = window.innerWidth < 768;
-    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-    const horizontalShift = mobile ? 0 : -canvas.width * 0.08;
-    const verticalShift = mobile ? -canvas.height * 0.1 : 0;
-    const x = (canvas.width - img.width * scale) / 2 + horizontalShift;
-    const y = (canvas.height - img.height * scale) / 2 + verticalShift;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
-  }
-}, [images]);
-
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    const ctx = gsap.context(() => {
+      gsap.to(textRef.current, {
+        y: 100,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: '25% top',
+          scrub: true,
+        }
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
+
+  const renderFrame = useCallback((index) => {
+    if (!canvasRef.current || images.length < FRAMES_COUNT) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const img = images[Math.max(0, Math.min(Math.floor(index) - 1, FRAMES_COUNT - 1))];
+
+    if (img && img.complete) {
+      const mobile = window.innerWidth < 768;
+      const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+      const horizontalShift = mobile ? 0 : -canvas.width * 0.08;
+      const verticalShift = mobile ? -canvas.height * 0.1 : 0;
+      const x = (canvas.width - img.width * scale) / 2 + horizontalShift;
+      const y = (canvas.height - img.height * scale) / 2 + verticalShift;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
+    }
+  }, [images]);
 
   useEffect(() => {
     const loadedImages = [];
@@ -93,8 +87,11 @@ useEffect(() => {
   useEffect(() => {
     const resize = () => {
       if (!canvasRef.current) return;
-      canvasRef.current.width = window.innerWidth;
-      canvasRef.current.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvasRef.current.width = window.innerWidth * dpr;
+      canvasRef.current.height = window.innerHeight * dpr;
+      const ctx = canvasRef.current.getContext('2d');
+      ctx.scale(dpr, dpr);
     };
     window.addEventListener('resize', resize);
     resize();
