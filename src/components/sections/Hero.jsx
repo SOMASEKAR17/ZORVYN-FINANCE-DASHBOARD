@@ -65,13 +65,10 @@ export default function Hero() {
     if (img && img.complete) {
       const displayW = window.innerWidth;
       const displayH = window.innerHeight;
-      const mobile = displayW < 768;
       
-      const scale = Math.max(displayW / img.width, displayH / img.height);
-      const horizontalShift = mobile ? 0 : -displayW * 0.08;
-      const verticalShift = mobile ? -displayH * 0.1 : 0;
-      const x = (displayW - img.width * scale) / 2 + horizontalShift;
-      const y = (displayH - img.height * scale) / 2 + verticalShift;
+      const scale = displayW / img.width;
+      const x = (displayW - img.width * scale) / 2;
+      const y = (displayH - img.height * scale) / 2;
       
       ctx.clearRect(0, 0, displayW, displayH);
       ctx.drawImage(img, 0, 0, img.width, img.height, x, y, img.width * scale, img.height * scale);
@@ -120,8 +117,8 @@ export default function Hero() {
       const w = window.innerWidth;
       const h = window.innerHeight;
       
-      canvasRef.current.width = w ;
-      canvasRef.current.height = h ;
+      canvasRef.current.width = w * dpr;
+      canvasRef.current.height = h * dpr;
       canvasRef.current.style.width = `${w}px`;
       canvasRef.current.style.height = `${h}px`;
       
@@ -132,9 +129,10 @@ export default function Hero() {
     resize();
     return () => window.removeEventListener('resize', resize);
   }, []);
+  
 
   return (
-    <section ref={containerRef} className="relative w-full h-[200vh] bg-white">
+    <section ref={containerRef} className="relative w-full h-[200vh] bg-gradient-to-b from-[#F4F7F6] via-[#D3DCE3] to-[#97A3AE]">
       {isLoading && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white gap-6">
           <p className="text-[#14222E]/80 text-[20px] tracking-[0.4em] uppercase font-bold">
@@ -155,7 +153,7 @@ export default function Hero() {
       <div className="sticky top-0 w-full h-screen overflow-hidden">
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full"
+          className="absolute inset-0 w-full h-full"
           style={{ display: 'block' }}
         />
 
