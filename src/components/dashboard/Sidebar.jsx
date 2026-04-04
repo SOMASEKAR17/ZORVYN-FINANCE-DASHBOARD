@@ -35,7 +35,6 @@ const Sidebar = () => {
         >
           <BarChart2 size={20} />
         </Link>
-        <div className="text-white/30 hover:text-white cursor-pointer transition-colors"><PieChart size={20} /></div>
         <div className="text-white/30 hover:text-white cursor-pointer transition-colors"><User size={20} /></div>
       </nav>
 
