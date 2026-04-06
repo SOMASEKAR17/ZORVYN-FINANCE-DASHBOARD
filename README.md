@@ -12,7 +12,7 @@
 ## Project Objectives Checklist
 
 ### 1. Dashboard Overview
-- [ ] **Summary Cards:** Implementation of Total Balance, Income, and Expenses.
+- [X] **Summary Cards:** Implementation of Total Balance, Income, and Expenses.
 - [ ] **Time-Based Visualization:** Interactive balance trend line chart (e.g., "Activities" widget).
 - [ ] **Categorical Visualization:** Spending breakdown (e.g., Donut or Pie chart).
 - [ ] **Liquid Glass UI:** Applying refraction and blur effects to all container cards.
