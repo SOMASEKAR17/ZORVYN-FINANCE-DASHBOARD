@@ -12,7 +12,7 @@ export default function TransactionsPage() {
       <main className="flex flex-col w-full min-h-screen md:pl-[60px] pb-20 md:pb-0">
         <TopBar />
         <div className="px-6 md:px-12 lg:px-20 pt-0 flex flex-col gap-8">
-          <header className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <header className="flex ml-5 flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <div className="flex items-center gap-3 text-[#831AE3] font-black uppercase text-sm tracking-[0.2em] mb-3">
                 <span className="w-8 h-[2px] bg-[#831AE3]"></span>
@@ -22,17 +22,6 @@ export default function TransactionsPage() {
                 Financial<br />
                 <span className="text-[#818F9B]/40">Activities</span>
               </h1>
-            </div>
-            <div className="bg-white/40 border border-white/60 p-4 rounded-3xl backdrop-blur-md flex items-center gap-6">
-              <div className="flex flex-col">
-                <span className="text-[#818F9B] text-xs font-bold uppercase tracking-widest">Total Volume</span>
-                <span className="text-xl font-black text-[#0A0A0A]">100 Items</span>
-              </div>
-              <div className="w-[1px] h-8 bg-[#818F9B]/10"></div>
-              <div className="flex flex-col">
-                <span className="text-[#818F9B] text-xs font-bold uppercase tracking-widest">Global Vault</span>
-                <span className="text-xl font-black text-[#831AE3]">Active</span>
-              </div>
             </div>
           </header>
           
